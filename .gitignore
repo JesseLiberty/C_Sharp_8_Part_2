@@ -36,3 +36,17 @@
 *.lock
 Lecture 3/Delegates/.vs/Delegates/DesignTimeBuild/.dtbcache
 Lecture 3/Delegates/.vs/Delegates/v16/.suo
+Lecture 3/Delegates/Delegates/obj/Debug/netcoreapp3.0/Delegates.AssemblyInfo.cs
+Lecture 3/Delegates/Delegates/obj/Debug/netcoreapp3.0/Delegates.AssemblyInfoInputs.cache
+Lecture 3/Delegates/Delegates/obj/Debug/netcoreapp3.0/Delegates.assets.cache
+Lecture 3/Delegates/Delegates/obj/Debug/netcoreapp3.0/Delegates.csprojAssemblyReference.cache
+Lecture 3/Delegates/Delegates/obj/Delegates.csproj.nuget.cache
+Lecture 3/Delegates/Delegates/obj/Delegates.csproj.nuget.dgspec.json
+*.props
+*.targets
+*.json
+Lecture 4/Events/.vs/Events/v16/.suo
+*.pdb
+*.cs
+*.cache
+*.txt
