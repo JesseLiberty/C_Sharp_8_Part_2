@@ -47,7 +47,6 @@ Lecture 3/Delegates/Delegates/obj/Delegates.csproj.nuget.dgspec.json
 *.json
 Lecture 4/Events/.vs/Events/v16/.suo
 *.pdb
-*.cs
 *.cache
 *.txt
 Delegates/Delegates/.vs/Delegates/DesignTimeBuild/.dtbcache
