@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using militaryAirCraft;
 using privateAirTransport;
 using publicAirTransport;
@@ -26,7 +27,7 @@ namespace AdvancedPatternMatching
          var fighter = new Fighter();
 
          Console.WriteLine($"Parking for a small plane is " +
-         $"{parkingCalculator.CalculateParkingCost(oneProp)}");
+                           $"{parkingCalculator.CalculateParkingCost(oneProp)}");
 
          Console.WriteLine($"Parking for a jet is " +
                            $"{parkingCalculator.CalculateParkingCost(jet)}");
@@ -36,7 +37,6 @@ namespace AdvancedPatternMatching
 
          Console.WriteLine($"Parking for a fighter is " +
                            $"{parkingCalculator.CalculateParkingCost(fighter)}");
-
       }
    }
 }
@@ -53,6 +53,29 @@ namespace ParkingCalculator
             JumboJet jumbo => 500,
             Fighter fighter => 1200,
             { } => throw new ArgumentException(message: "Don't know this type"),
+            null => throw new ArgumentNullException()
+         };
+
+      public double CalculatePassengerDiscount(object plane) =>
+         plane switch
+         {
+            OneProp prop => prop.NumPassengers switch
+            {
+               0 => 50.00,
+               1 => 50.00 - 25.00,
+               _ => 50.00,
+            },
+
+            Fighter fighter => fighter.NumPassengers switch
+            {
+               1 => 1200 - 500,
+               _ => 1200,
+            },
+
+            Jet jet when jet.NumPassengers / jet.Capacity < 0.25 => 200.00 + 75.00,
+            Jet jet when jet.NumPassengers / jet.Capacity > .75 => 200.00 - 75.00,
+
+            { } => throw new ArgumentException("Not known: "),
             null => throw new ArgumentNullException()
          };
    }
@@ -79,7 +102,6 @@ namespace publicAirTransport
    {
       public int Capacity { get; set; }
       public int NumPassengers { get; set; }
-
    }
 }
 
@@ -92,4 +114,3 @@ namespace militaryAirCraft
       public int NumberOfMissiles { get; set; }
    }
 }
-
