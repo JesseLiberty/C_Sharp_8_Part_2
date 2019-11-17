@@ -37,6 +37,12 @@ namespace AdvancedPatternMatching
 
          Console.WriteLine($"Parking for a fighter is " +
                            $"{parkingCalculator.CalculateParkingCost(fighter)}");
+
+         jet.NumPassengers = 225;
+         jet.Capacity = 250;
+         var finalPrice = parkingCalculator.CalculatePassengerDiscount(jet);
+         Console.WriteLine($"Final discounted price for the jet is {finalPrice}");
+
       }
    }
 }
@@ -52,8 +58,8 @@ namespace ParkingCalculator
             Jet jet => 200.00,
             JumboJet jumbo => 500,
             Fighter fighter => 1200,
-            { } => throw new ArgumentException(message: "Don't know this type"),
-            null => throw new ArgumentNullException()
+            null => throw new ArgumentNullException(),
+            _ => throw new ArgumentException(message: "Don't know this type")
          };
 
       public double CalculatePassengerDiscount(object plane) =>
@@ -73,10 +79,10 @@ namespace ParkingCalculator
             },
 
             Jet jet when jet.NumPassengers / jet.Capacity < 0.25 => 200.00 + 75.00,
-            Jet jet when jet.NumPassengers / jet.Capacity > .75 => 200.00 - 75.00,
-
-            { } => throw new ArgumentException("Not known: "),
-            null => throw new ArgumentNullException()
+            Jet jet when jet.NumPassengers / jet.Capacity >= .75 => 200.00 - 75.00,
+            null => throw new ArgumentNullException(),
+            _ => throw new ArgumentException("Not known: "),
+            
          };
    }
 }
@@ -85,7 +91,7 @@ namespace privateAirTransport
 {
    public class OneProp
    {
-      public int NumPassengers { get; set; }
+      public double NumPassengers { get; set; }
    }
 }
 
@@ -95,13 +101,13 @@ namespace publicAirTransport
    {
       public string Class { get; set; }
       public int Capacity { get; set; }
-      public int NumPassengers { get; set; }
+      public double NumPassengers { get; set; }
    }
 
    public class JumboJet
    {
-      public int Capacity { get; set; }
-      public int NumPassengers { get; set; }
+      public double Capacity { get; set; }
+      public double NumPassengers { get; set; }
    }
 }
 
@@ -110,7 +116,7 @@ namespace militaryAirCraft
    public class Fighter
    {
       public int Speed { get; set; }
-      public int NumPassengers { get; set; }
+      public double NumPassengers { get; set; }
       public int NumberOfMissiles { get; set; }
    }
 }
